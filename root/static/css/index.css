@@ -1,4 +1,61 @@
 body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #2e8734;
+}
+
+.main_header {
+    background-color: #1a1a1a;
+    text-align: center;
+    height: 70px;
+    padding: 5px;
+    color: rgb(124, 255, 240);
+    font-size: 1.4em;
+    line-height: 10px;
+    margin: 0;
+    font-family: 'Carter One', cursive;
+    justify-content: space-between;
+
+}
+
+.controller_menu {
+    height: calc(100vh - (80px));
+    align-items: left;
+    width: 40%;
+    padding-right: 5px;
+    display: flex;
+    flex-flow: column;
+    background-color: #deafaf;
+    
+}
+.expressions_header {
+    background-color: #b38484;
+    font-family: 'Inconsolata', monospace;
+    font-weight: 700;
+    line-height: 20px;
+    font-size: 20px;
+    padding-left: 15px;
+}
+
+#expressions_list {
+    padding: 1px;
+    padding-right: 10px;
+    height: 100%;
+    overflow-y: scroll;
+    display: flex;
+    flex-flow: column;
+    background-color: #81aae4;
+}
+.expression {
+    font-family: 'Inconsolata', monospace;
+    font-size: 30px;
+    padding: 8px;
+    margin: 2px;
+    background-color: #72e7de;
+}
+
+/*body {
     margin: 0;
     padding: 0;
 }
@@ -8,17 +65,18 @@ header {
     text-align: center;
     font-family: 'Dosis', sans-serif;
     color: #fff;
-    padding: 5px;
+    font-size: inherit;
     box-shadow: inset 0px -100px 80px -100px rgb(0, 0, 0), inset  0px 0px 50px -30px rgb(0, 0, 0);
 }
 
 h1 {
     margin: 0;
+    font-size: 20%;
 }
 
 aside {
-    width: 250px;
-    margin-top: -60;
+    width: 40%;
+    margin-top: -120;
 }
 
 .expression-list {
@@ -27,22 +85,31 @@ aside {
     overflow-x: hidden;
     position: fixed;
 
-    height: calc(100% - 92px);
-    width: 250px;
-    margin-left: -40px;
+    height: 95%;
+    /*height: calc(100% - 184px);\/
+    
+    
     margin-top: 0px;
-
+    width: 40%;
     box-shadow: 0px 0px 50px -30px rgb(0, 0, 0);
     z-index: -1;
 }
 .expression {
-    padding: 5px;
-
+    
+    padding: 1%;
     font-size: 20px;
+    width: 97%;
     
     box-shadow: inset rgb(0, 0, 0) 0px 0px 20px -10px;
     border: 1px solid #363744;
 }
+
+.artwork {
+    width: 40%;
+
+    float: right;
+    box-shadow: 5px 5px 25px 0px rgb(0, 0, 0);
+}*/
 
 /*.sidebar {
     width: 200px;

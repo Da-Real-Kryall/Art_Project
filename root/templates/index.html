@@ -5,53 +5,63 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@700&display=swap" rel="stylesheet"> 
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=Bitter:wght@700&family=Inconsolata&family=Inconsolata:wght@900&display=swap" rel="stylesheet"> 
 
     <link rel="icon" href="static/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="static/css/index.css">
     <script src="static/js/index.js"></script> 
   </head>
-  <body>
+  <body onload="update_canvas()">
 
-    <header>
+    <header class="main_header">
       <h1>Artwork</h1>
     </header>
 
-    <aside>
+    <div class="controller_menu">
 
-      <header>
-        <h1>Expressions</h1>
+      <header class="expressions_header">
+        <h1>Expressions:</h1>
       </header>
 
-      <ol class="expression-list">
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleh</li>
-        <li class="expression">bleheeee</li>
-      </ul>
+      <div id="expressions_list">
+        <input class="expression" type="text" oninput="update_canvas()" value="r = Math.round(((x+1)*y/4)%40) <= 30 ? 255 : 1">
+        <input class="expression" type="text" oninput="update_canvas()" value="g = Math.round((y+1)/size*240)">
+        <input class="expression" type="text" oninput="update_canvas()" value="g += (Math.round((x+1)*y/4)%50 <= 5) ? 255 : 1">
+        <input class="expression" type="text" oninput="update_canvas()" value="g += (40 <= x && x <=150) ? 80 : 0">
+        <input class="expression" type="text" oninput="update_canvas()" value="b = Math.round((x+1)/size*235)">
+        <input class="expression" type="text" oninput="update_canvas()" value="b += (Math.round((x+1)*y/2)%50 <= 10) ? 255 : 1">
+        <input class="expression" type="text" oninput="update_canvas()" value="b += (x < 100) ? 120 : 0">
+        <input class="expression" type="text" oninput="update_canvas()" value="lp = 120*((280 + Math.round((x+1)/4)) <= y && y <= (350 + Math.round((x+1)/8)) )">
+        <input class="expression" type="text" oninput="update_canvas()" value="r -= lp; g -= lp ">
+        <input class="expression" type="text" oninput="update_canvas()" value="lp = 200*((-10 + Math.round((y+1)/6))<= x && x <= (0 + Math.round((y+1)/4) ))">
+        <input class="expression" type="text" oninput="update_canvas()" value="r -= lp; g += lp; b += lp">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+      </div>
 
-    </aside>
-    <div class="sidebar">
+    </div>
+
+    <main>
+      <div class="canvas_container">
+        <canvas id="canvas" width="400" height="400"></canvas>
+      </div>
+      <!--<div class="artwork-container">
+        <canvas id="canvas" class="artwork" width="400" height="400"></canvas>
+      </div>-->
+    </main>
 
   </body>
 </html> 

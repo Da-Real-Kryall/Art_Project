@@ -1,10 +1,9 @@
-import flask, os
+import flask
 
-#os.chdir(__file__[:-7]+"/root/")
 app = flask.Flask(__name__)
 
-port=8080
-host="localhost"
+port=8123
+host="0.0.0.0"
 
 @app.route('/')
 def index():
