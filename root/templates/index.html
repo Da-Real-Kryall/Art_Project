@@ -3,6 +3,11 @@
   <head>
     <title>Artwork</title>
 
+    <meta content="Artwork" property="og:title" />
+    <meta content="Art thingy for art class" property="og:description" />
+    <meta content="https://cdn.discordapp.com/attachments/567206658070020109/1004012545947996261/code.png" property="og:image" />
+    <meta content="#ff8383" data-react-helmet="true" name="theme-color" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=Bitter:wght@700&family=Inconsolata&family=Inconsolata:wght@900&display=swap" rel="stylesheet"> 
@@ -14,13 +19,17 @@
   <body onload="update_canvas()">
 
     <header class="main_header">
-      <h1>Artwork</h1>
+      <h1 id="main_h1">Artwork</h1>
     </header>
 
+    <div class="canvas_container">
+      <canvas id="canvas" width="400" height="400"></canvas>
+    </div>
+    
     <div class="controller_menu">
 
       <header class="expressions_header">
-        <h1>Expressions:</h1>
+        <h1 id="expression_h1">Expressions:</h1>
       </header>
 
       <div id="expressions_list">
@@ -35,33 +44,13 @@
         <input class="expression" type="text" oninput="update_canvas()" value="r -= lp; g -= lp ">
         <input class="expression" type="text" oninput="update_canvas()" value="lp = 200*((-10 + Math.round((y+1)/6))<= x && x <= (0 + Math.round((y+1)/4) ))">
         <input class="expression" type="text" oninput="update_canvas()" value="r -= lp; g += lp; b += lp">
-        <input class="expression" type="text" oninput="update_canvas()" value="">
-        <input class="expression" type="text" oninput="update_canvas()" value="">
-        <input class="expression" type="text" oninput="update_canvas()" value="">
-        <input class="expression" type="text" oninput="update_canvas()" value="">
-        <input class="expression" type="text" oninput="update_canvas()" value="">
-        <input class="expression" type="text" oninput="update_canvas()" value="">
-        <input class="expression" type="text" oninput="update_canvas()" value="">
-        <input class="expression" type="text" oninput="update_canvas()" value="">
-        <input class="expression" type="text" oninput="update_canvas()" value="">
-        <input class="expression" type="text" oninput="update_canvas()" value="">
-        <input class="expression" type="text" oninput="update_canvas()" value="">
-        <input class="expression" type="text" oninput="update_canvas()" value="">
-        <input class="expression" type="text" oninput="update_canvas()" value="">
-        <input class="expression" type="text" oninput="update_canvas()" value="">
-        <input class="expression" type="text" oninput="update_canvas()" value="">
+      </div>
+      <div class="expressions_footer">
+        <!--for bottom of controller menu-->
       </div>
 
     </div>
 
-    <main>
-      <div class="canvas_container">
-        <canvas id="canvas" width="400" height="400"></canvas>
-      </div>
-      <!--<div class="artwork-container">
-        <canvas id="canvas" class="artwork" width="400" height="400"></canvas>
-      </div>-->
-    </main>
 
   </body>
 </html> 
