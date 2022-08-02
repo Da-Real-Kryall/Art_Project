@@ -33,17 +33,21 @@
       </header>
 
       <div id="expressions_list">
-        <input class="expression" type="text" oninput="update_canvas()" value="r = Math.round(((x+1)*y/4)%40) <= 30 ? 255 : 1">
-        <input class="expression" type="text" oninput="update_canvas()" value="g = Math.round((y+1)/size*240)">
-        <input class="expression" type="text" oninput="update_canvas()" value="g += (Math.round((x+1)*y/4)%50 <= 5) ? 255 : 1">
+        <input class="expression" type="text" oninput="update_canvas()" value="r = round(((x+1)*y/4)%40) <= 30 ? 255 : 1">
+        <input class="expression" type="text" oninput="update_canvas()" value="g = round((y+1)/size*240)">
+        <input class="expression" type="text" oninput="update_canvas()" value="g += (round((x+1)*y/4)%50 <= 5) ? 255 : 1">
         <input class="expression" type="text" oninput="update_canvas()" value="g += (40 <= x && x <=150) ? 80 : 0">
-        <input class="expression" type="text" oninput="update_canvas()" value="b = Math.round((x+1)/size*235)">
-        <input class="expression" type="text" oninput="update_canvas()" value="b += (Math.round((x+1)*y/2)%50 <= 10) ? 255 : 1">
+        <input class="expression" type="text" oninput="update_canvas()" value="b = round((x+1)/size*235)">
+        <input class="expression" type="text" oninput="update_canvas()" value="b += (round((x+1)*y/2)%50 <= 10) ? 255 : 1">
         <input class="expression" type="text" oninput="update_canvas()" value="b += (x < 100) ? 120 : 0">
-        <input class="expression" type="text" oninput="update_canvas()" value="lp = 120*((280 + Math.round((x+1)/4)) <= y && y <= (350 + Math.round((x+1)/8)) )">
+        <input class="expression" type="text" oninput="update_canvas()" value="lp = 120*((280 + round((x+1)/4)) <= y && y <= (350 + round((x+1)/8)) )">
         <input class="expression" type="text" oninput="update_canvas()" value="r -= lp; g -= lp ">
-        <input class="expression" type="text" oninput="update_canvas()" value="lp = 200*((-10 + Math.round((y+1)/6))<= x && x <= (0 + Math.round((y+1)/4) ))">
+        <input class="expression" type="text" oninput="update_canvas()" value="lp = 200*((-10 + round((y+1)/6))<= x && x <= (0 + round((y+1)/4) ))">
         <input class="expression" type="text" oninput="update_canvas()" value="r -= lp; g += lp; b += lp">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
+        <input class="expression" type="text" oninput="update_canvas()" value="">
       </div>
       <div class="expressions_footer">
         <!--for bottom of controller menu-->
