@@ -4,6 +4,7 @@ onmessage = function(e) {
     let size = e.data[0];
     let expressions = e.data[1];
     let imageData = e.data[2];
+    let slider_data = e.data[3];
 
     //Iterate through every pixel
     try {
@@ -14,7 +15,9 @@ onmessage = function(e) {
         
             let r = 0;
             let g = 0;
-            let b = 100;
+            let b = 0;
+
+            let h1 = 
         
             eval(`with (Math) {${expressions.join("; ")}}`);
             

@@ -13,6 +13,12 @@ function update_canvas() {
     for (let i = 0; i < expressions.length; i++) {
         expressions_array.push(expressions.item(i).value);
     }
+
+    let slider_data = [];
+    let sliders = document.getElementsByClassName('slider');
+    for (let i = 0; i < sliders.length; i++) {
+        slider_data.push(sliders.item(i).value);
+    }
     
     if (number_of_workers > 0) {
         number_of_workers = 0;
@@ -26,7 +32,7 @@ function update_canvas() {
     }
 
     number_of_workers++;
-    worker.postMessage([size, expressions_array, imageData]);
+    worker.postMessage([size, expressions_array, imageData, slider_data]);
 }
 
 function worker_onmessage(e) {
@@ -74,8 +80,11 @@ function update_gradients() {
     let buffer_wheel = document.getElementsByClassName('circles')[0];
     buffer_wheel.style.setProperty('--load-1', calculate_colour(0.75, 0.5, 0.5, 255));
     buffer_wheel.style.setProperty('--load-2', calculate_colour(0.25, 0.75, 0.5, 255));
-    buffer_wheel.style.setProperty('--load-1', calculate_colour(0.05, 0.05, 0.5, 255));
+    buffer_wheel.style.setProperty('--load-3', calculate_colour(0.05, 0.05, 0.5, 255));
 
+    for (let i = 0; i < document.getElementsByClassName('slider').length; i++) {
+        document.body.style.setProperty(`--r${i+1}`, calculate_colour(i*0.05, i*0.05, 0.95, 255)); 
+    }
 }
 worker.onmessage = worker_onmessage;
 

@@ -19,6 +19,19 @@
     --load-1: #fff;
     --load-2: #fff;
     --load-3: #fff;
+
+    --r1: #fff;
+    --r2: #fff;
+    --r3: #fff;
+    --r4: rgb(240, 12, 12);
+    --r5: #fff;
+    --r6: #fff;
+    --r7: #fff;
+    --r8: #fff;
+    --r9: #fff;
+    --r10: #fff;
+    --r11: #fff;
+    --r12: #fff;
 }
 @keyframes fading-in {
     0% { opacity: 0; }
@@ -31,18 +44,14 @@
 
 @keyframes buffer_wheel {
     from {
-      transform: rotate(0deg) translateX(15px) rotate(0deg);
-      background-color: var(--load-1); 
+        transform: rotate(0deg) translateX(15px) rotate(0deg);
+        background-color: var(--load-1); 
     }
+    33% {background-color: var(--load-2);}
+    66% {background-color: var(--load-3);}
     to {
         transform: rotate(360deg) translateX(15px) rotate(-360deg);
         background-color: var(--load-1);
-    }
-    33% {
-        background-color: var(--load-2);
-    }
-    66% {
-        background-color: var(--load-3);
     }
 }
 
@@ -59,21 +68,12 @@
     height: 10px;
     animation: buffer_wheel 1.5s linear infinite;
 }
-#circle_1 {
-    animation-delay: -1.25s;
-}
-#circle_2 {
-    animation-delay: -0.25s;
-}
-#circle_3 {
-    animation-delay: -0.5s;
-}
-#circle_4 {
-    animation-delay: -0.75s;
-}
-#circle_5 {
-    animation-delay: -1s;
-}
+#circle_1 {animation-delay: -1.25s;}
+#circle_2 {animation-delay: -0.25s;}
+#circle_3 {animation-delay: -0.5s;}
+#circle_4 {animation-delay: -0.75s;}
+#circle_5 {animation-delay: -1s;}
+
 #tooltip_box {
     animation: none;
     padding: 25px;
@@ -171,6 +171,7 @@ body {
     height: 100%;
 
     overflow-y: scroll;
+    overflow-x: hidden;
     display: flex;
     flex-flow: column;
 
@@ -187,6 +188,8 @@ body {
     border-style:inset;
 }
 
+
+
 .canvas_container {
     display: flex;
     flex-flow: row;
@@ -200,4 +203,129 @@ body {
     margin: auto;
     display: block;
     height: 80%;
+}
+
+
+.slider {
+    appearance: none;
+    margin: 10px;
+    margin-left: 4px;
+    border-radius: 10px;
+    border-style: none;
+    background-color: #525252;
+    box-shadow: inset 0px -25px 100px -40px rgb(0, 0, 0);
+}
+
+/* Special styling for WebKit/Blink */
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    border-width: 0px;
+    border-color: rgba(0,0,0,0);
+    height: 25px;
+    width: 25px;
+    border-radius: 17.5px;
+    cursor:grab;
+    margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
+  }
+  /* All the same stuff for Firefox */
+  input[type=range]::-moz-range-thumb {
+    box-shadow: inset 8px 5px 15px -5px rgba(0,0,0,0.7 );
+    border-width: 0px;
+    border-color: rgba(0,0,0,0);
+    height: 25px;
+    width: 25px;
+    border-radius: 17.5px;
+    cursor:grab;
+  }
+  
+  /* All the same stuff for IE */
+  input[type=range]::-ms-thumb {
+    box-shadow: inset 8px 5px 15px -5px rgba(0,0,0,0.7 );
+    border-width: 0px;
+    border-color: rgba(0,0,0,0);
+    height: 25px;
+    width: 25px;
+    cursor: grab;
+}
+
+/*
+@for $i from 1 through 12 {
+  input[type=range]#r#{$i} {
+    &::-webkit-slider-thumb,
+    &::-moz-range-thumb,
+    &::-ms-thumb { background: var(--r#{$i}); }
+  }
+}
+*/
+input[type=range]#r1::-webkit-slider-thumb {background: var(--r1);}
+input[type=range]#r1::-moz-range-thumb {background: var(--r1);}
+input[type=range]#r1::-ms-thumb {background: var(--r1);}
+
+input[type=range]#r2::-webkit-slider-thumb {background: var(--r2);}
+input[type=range]#r2::-moz-range-thumb {background: var(--r2);}
+input[type=range]#r2::-ms-thumb {background: var(--r2);}
+
+input[type=range]#r3::-webkit-slider-thumb {background: var(--r3);}
+input[type=range]#r3::-moz-range-thumb {background: var(--r3);}
+input[type=range]#r3::-ms-thumb {background: var(--r3);}
+
+input[type=range]#r4::-webkit-slider-thumb {background: var(--r4);}
+input[type=range]#r4::-moz-range-thumb {background: var(--r4);}
+input[type=range]#r4::-ms-thumb {background: var(--r4);}
+
+input[type=range]#r5::-webkit-slider-thumb {background: var(--r5);}
+input[type=range]#r5::-moz-range-thumb {background: var(--r5);}
+input[type=range]#r5::-ms-thumb {background: var(--r5);}
+
+input[type=range]#r6::-webkit-slider-thumb {background: var(--r6);}
+input[type=range]#r6::-moz-range-thumb {background: var(--r6);}
+input[type=range]#r6::-ms-thumb {background: var(--r6);}
+
+input[type=range]#r7::-webkit-slider-thumb {background: var(--r7);}
+input[type=range]#r7::-moz-range-thumb {background: var(--r7);}
+input[type=range]#r7::-ms-thumb {background: var(--r7);}
+
+input[type=range]#r8::-webkit-slider-thumb {background: var(--r8);}
+input[type=range]#r8::-moz-range-thumb {background: var(--r8);}
+input[type=range]#r8::-ms-thumb {background: var(--r8);}
+
+input[type=range]#r9::-webkit-slider-thumb {background: var(--r9);}
+input[type=range]#r9::-moz-range-thumb {background: var(--r9);}
+input[type=range]#r9::-ms-thumb {background: var(--r9);}
+
+input[type=range]#r10::-webkit-slider-thumb {background: var(--r10);}
+input[type=range]#r10::-moz-range-thumb {background: var(--r10);}
+input[type=range]#r10::-ms-thumb {background: var(--r10);}
+
+input[type=range]#r11::-webkit-slider-thumb {background: var(--r11);}
+input[type=range]#r11::-moz-range-thumb {background: var(--r11);}
+input[type=range]#r11::-ms-thumb {background: var(--r11);}
+
+input[type=range]#r12::-webkit-slider-thumb {background: var(--r12);}
+input[type=range]#r12::-moz-range-thumb {background: var(--r12);}
+input[type=range]#r12::-ms-thumb {background: var(--r12);}
+
+
+/* Styles for different browsers to clear defaults */
+input[type=range] {
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    width: 100%; /* Specific width is required for Firefox. */
+    background: transparent; /* Otherwise white in Chrome */
+}
+  
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+  
+input[type=range]:focus {
+    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+  
+input[type=range]::-ms-track {
+    width: 100%;
+    cursor: pointer;
+    /* Hides the slider so custom styles can be added */
+    background: transparent; 
+    border-color: transparent;
+    color: transparent;
 }
