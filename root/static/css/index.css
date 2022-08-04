@@ -3,18 +3,84 @@
     --main-end: rgb(255, 255, 255);
     --expressions-start: rgb(255, 255, 255);
     --expressions-end: rgb(255, 255, 255);
-
+    
     /*
     --main-start: rgb(134, 251, 50);
     --main-end: rgb(50, 248, 251);
     --expressions-start: rgb(41, 4, 174);
     --expressions-end: rgb(205, 2, 2);
     */
-    --bg-top-left: rgb(0,0,0);
-    --bg-top-right: rgb(0,0,0);
-    --bg-bottom-left: rgb(0,0,0);
-    --bg-bottom-right: rgb(0,0,0);
+    --bg-top-left: rgb(86, 86, 86);
+    --bg-top-right: rgb(86, 86, 86);
+    --bg-bottom-left: rgb(86, 86, 86);
+    --bg-bottom-right: rgb(86, 86, 86);
     --bg-centre: rgb(0, 0, 0);
+
+    --load-1: #fff;
+    --load-2: #fff;
+    --load-3: #fff;
+}
+@keyframes fading-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes fading-out {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes buffer_wheel {
+    from {
+      transform: rotate(0deg) translateX(15px) rotate(0deg);
+      background-color: var(--load-1); 
+    }
+    to {
+        transform: rotate(360deg) translateX(15px) rotate(-360deg);
+        background-color: var(--load-1);
+    }
+    33% {
+        background-color: var(--load-2);
+    }
+    66% {
+        background-color: var(--load-3);
+    }
+}
+
+.circles {
+    float: right;
+    margin-top: -36px;
+    margin-right: 8px;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    animation: buffer_wheel 1.5s linear infinite;
+}
+#circle_1 {
+    animation-delay: -1.25s;
+}
+#circle_2 {
+    animation-delay: -0.25s;
+}
+#circle_3 {
+    animation-delay: -0.5s;
+}
+#circle_4 {
+    animation-delay: -0.75s;
+}
+#circle_5 {
+    animation-delay: -1s;
+}
+#tooltip_box {
+    animation: none;
+    padding: 25px;
+    margin-left: -20px;
+    margin-top: -20px;
+    z-index:100;
+    position: relative;
 }
 
 body {
@@ -76,6 +142,8 @@ body {
     box-shadow: inset 0px -25px 100px -40px rgb(0, 0, 0);
     border-radius: 14px 14px 0px 0px;
     
+
+
     margin: 10px;
     margin-bottom: 0px;
     padding-left: 16px;
@@ -131,5 +199,5 @@ body {
     padding: 0;
     margin: auto;
     display: block;
-    width: 80%;
+    height: 80%;
 }
