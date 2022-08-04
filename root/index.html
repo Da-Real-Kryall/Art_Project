@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Artwork</title>
+
+    <meta content="Artwork" property="og:title" />
+    <meta content="Art thingy for art class" property="og:description" />
+    <meta content="https://cdn.discordapp.com/attachments/567206658070020109/1004012545947996261/code.png" property="og:image" />
+    <meta content="#ff8383" data-react-helmet="true" name="theme-color" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Carter+One&family=Bitter:wght@700&family=Inconsolata&family=Inconsolata:wght@900&display=swap" rel="stylesheet"> 
+
+    <link rel="icon" href="static/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="static/css/index.css">
+    <script src="static/js/index.js"></script> 
+  </head>
+  <body onload="update_canvas()">
+
+    <header class="main_header">
+      <h1 id="main_h1">Artwork</h1>
+    </header>
+
+    <div class="canvas_container">
+      <canvas id="canvas" width="400" height="400"></canvas>
+    </div>
+    
+    <div class="controller_menu">
+
+      <header class="expressions_header">
+        <h1 id="expression_h1" >Expressions:</h1>
+        <div class="circles" title="Loading...">
+          <div id="circle_1" class="circle"></div>
+          <div id="circle_2" class="circle"></div>
+          <div id="circle_3" class="circle"></div>
+          <div id="circle_4" class="circle"></div>
+          <div id="circle_5" class="circle"></div>
+          <div id="circle_6" class="circle"></div>
+          <div id="tooltip_box"></div>
+        </div>
+      </header>
+
+      <div id="expressions_list">
+        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r1">
+        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r2">
+        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r3">
+        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r4">
+        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r5">
+        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r6">
+        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r7">
+        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r8">
+        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r9">
+        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r10">
+        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r11">
+        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r12">
+        <input class="expression" type="text" oninput="update_canvas()" value="r = round(((x+1)*y/4)%40) <= 30 ? 255 : 1">
+        <input class="expression" type="text" oninput="update_canvas()" value="g = round((y+1)/size*240)">
+        <input class="expression" type="text" oninput="update_canvas()" value="g += (round((x+1)*y/4)%50 <= 5) ? 255 : 1">
+        <input class="expression" type="text" oninput="update_canvas()" value="g += (40 <= x && x <=150) ? 80 : 0">
+        <input class="expression" type="text" oninput="update_canvas()" value="b = round((x+1)/size*235)">
+        <input class="expression" type="text" oninput="update_canvas()" value="b += (round((x+1)*y/2)%50 <= 10) ? 255 : 1">
+        <input class="expression" type="text" oninput="update_canvas()" value="b += (x < 100) ? 120 : 0">
+        <input class="expression" type="text" oninput="update_canvas()" value="lp = 120*((280 + round((x+1)/4)) <= y && y <= (350 + round((x+1)/8)) )">
+        <input class="expression" type="text" oninput="update_canvas()" value="r -= lp; g -= lp ">
+        <input class="expression" type="text" oninput="update_canvas()" value="lp = 200*((-10 + round((y+1)/6))<= x && x <= (0 + round((y+1)/4) ))">
+        <input class="expression" type="text" oninput="update_canvas()" value="r -= lp; g += lp; b += lp">
+        <!--
+        -->
+      </div>
+      <div class="expressions_footer">
+        <!--for bottom of controller menu-->
+      </div>
+
+    </div>
+
+
+  </body>
+</html> 
