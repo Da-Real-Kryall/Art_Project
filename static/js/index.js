@@ -23,7 +23,7 @@ function update_canvas() {
     if (number_of_workers > 0) {
         number_of_workers = 0;
         worker.terminate();
-        worker = new Worker('/static/js/worker.js');
+        worker = new Worker('./static/js/worker.js');
         worker.onmessage = worker_onmessage;
     } else {
         let buffer_style = document.getElementsByClassName('circles')[0].style;
