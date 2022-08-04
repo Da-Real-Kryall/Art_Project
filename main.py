@@ -11,6 +11,6 @@ def index():
 
 @app.route('/favicon.ico')
 def favicon():
-    return flask.send_file(os.getcwd()+'/root/static/images/favicon.ico')
+    return flask.send_file(os.getcwd()+'/static/images/favicon.ico')
 
 app.run(host=host, port=port, debug=True)
