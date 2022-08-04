@@ -1,5 +1,5 @@
 const size = 400
-var worker = new Worker('/static/js/worker.js');
+var worker = new Worker('./static/js/worker.js');
 var number_of_workers = 0;
 
 function update_canvas() {
