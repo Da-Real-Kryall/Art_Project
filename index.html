@@ -14,7 +14,7 @@
 
     <link rel="icon" href="static/images/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="static/css/index.css">
-    <script src="static/js/index.js"></script> 
+    <script src="static/js/index.js"></script>
   </head>
   <body onload="update_canvas()">
 
@@ -29,7 +29,7 @@
     <div class="controller_menu">
 
       <header class="expressions_header">
-        <h1 id="expression_h1" >Expressions:</h1>
+        <h1 id="expression_h1" >Magic Sliders:</h1>
         <div class="circles" title="Loading...">
           <div id="circle_1" class="circle"></div>
           <div id="circle_2" class="circle"></div>
@@ -42,18 +42,11 @@
       </header>
 
       <div id="expressions_list">
-        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r1">
-        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r2">
-        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r3">
-        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r4">
-        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r5">
-        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r6">
-        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r7">
-        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r8">
-        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r9">
-        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r10">
-        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r11">
-        <input type="range" min="1" max="100" value="50" oninput="update_canvas()" class="slider" id="r12">
+
+        
+
+        
+        <!--
         <input class="expression" type="text" oninput="update_canvas()" value="r = round(((x+1)*y/4)%40) <= 30 ? 255 : 1">
         <input class="expression" type="text" oninput="update_canvas()" value="g = round((y+1)/size*240)">
         <input class="expression" type="text" oninput="update_canvas()" value="g += (round((x+1)*y/4)%50 <= 5) ? 255 : 1">
@@ -65,8 +58,7 @@
         <input class="expression" type="text" oninput="update_canvas()" value="r -= lp; g -= lp ">
         <input class="expression" type="text" oninput="update_canvas()" value="lp = 200*((-10 + round((y+1)/6))<= x && x <= (0 + round((y+1)/4) ))">
         <input class="expression" type="text" oninput="update_canvas()" value="r -= lp; g += lp; b += lp">
-        <!--
-        -->
+      -->
       </div>
       <div class="expressions_footer">
         <!--for bottom of controller menu-->
