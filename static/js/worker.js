@@ -1,19 +1,32 @@
+
+
 function evaluate_pixel(x, y, s) {
     let r = 0;
     let g = 0;
     let b = 0;
     let size = 400;
-    r = Math.round(((x+1)*y/4)%40) <= 30 ? 255 : 1;
+    r = Math.round(((x+1)*y/4)%40-s[3]) <= 30 ? 255 : 1;
     g = Math.round((y+s[1]-200)/size*240);
-    g += (Math.round((x+1)*y/4)%50 <= 5) ? 255 : 1;
+    g += (Math.round((x+1)*y/4)%50+s[3] <= 5) ? 255 : 1;
     g += (s[2] <= x && x <=s[2]*3.75) ? 80 : 0;
     b = Math.round((x+1)/size*s[0]);
-    b += (Math.round((x+1)*y/2)%50 <= 10) ? 255 : 1;
-    b += (x < 100) ? 120 : 0;
-    lp = 120*((280 + Math.round((x+1)/4)) <= y && y <= (350 + Math.round((x+1)/8)) );
-    r -= lp; g -= lp;
-    lp = 200*((-10 + Math.round((y+1)/6))<= x && x <= (0 + Math.round((y+1)/4) ));
-    r -= lp; g += lp; b += lp;
+    b += (Math.round((x+1)*y/2)%50-s[3] <= 10) ? 255 : 1;
+    b += (x < 60+s[2]) ? 120 : 0;
+
+    t = 120*((280 + Math.round((x+1)/4)) <= y+s[4]*1.4 && y+s[4]*1.4 <= (350 + Math.round((x+1)/8)) );
+    r -= t; g -= t;
+    
+    t = 200*((-10 + Math.round((y+1)/6)) <= x-s[4]*1.15 && x-s[4]*1.15 <= (0 + Math.round((y+1)/4) ));
+    r -= t; g += t; b += t;
+
+    t = Math.max(-(Math.abs((600-y-Math.round(x/2))-x+s[4]*2))+150, 0);
+    r -= t; g -= t; b -= t;
+
+    t = Math.max(-Math.round(Math.sqrt((x-270+5*s[5])**2 + (y-100)**2))+100-s[5], 0)*3 +
+        Math.max(-Math.round(Math.sqrt((x-320)**2 + (y-170)**2))+50-s[5], 0)*4 +
+        Math.max(-Math.round(Math.sqrt((x-250)**2 + (y-230)**2))+30-s[5], 0)*8;
+    r += t; g += t; b += t;
+
     return [r, g, b];
 }
 

@@ -2,6 +2,14 @@ const size = 400
 var worker = new Worker('./static/js/worker.js');
 var number_of_workers = 0;
 
+/*not implemented yet, ignore for now
+
+//used to make every second/third/fourth change of a slider be actually calculated (though the last change before letting go is always calculated)
+//(idk what to name it, pr's welcome)
+var foo = 0;
+
+*/
+
 //initialize input sliders
 input_data = [
     /*
@@ -13,12 +21,16 @@ input_data = [
         ]
     */
 
-   ["SunRay", "40", "0", "400"],
-   ["Lime", "201", "0", "400"],
-   ["Magenta", "235", "0", "400"],
-].reverse();
+    ["Magenta", "235", "0", "400"],
+    ["Lime", "201", "0", "500"],
+    ["SunRay", "40", "0", "400"],
+    ["Glare", "0", "-64", "64"],
+    ["Shear", "0", "-100", "380"],
+    ["WIP", "0", "-200", "50"],
+]
 
 function reset_label(index) {
+    update_canvas(index);
     document.getElementById(`v${index}`).innerHTML = input_data[index - 1][0];
 }
 
@@ -66,7 +78,7 @@ function update_canvas(index) {
         slider_data.push(parseInt(sliders.item(i).value));
     }
     
-    if (number_of_workers > 25) {
+    if (number_of_workers > 5) {
         number_of_workers = 0;
         //console.log(number_of_workers);
         worker.terminate();
@@ -79,6 +91,7 @@ function update_canvas(index) {
     }
 
     number_of_workers++;
+    //foo = (foo + 1)%32;
     worker.postMessage([size, expressions_array, imageData, slider_data]);
 }
 
@@ -134,7 +147,7 @@ function update_gradients() {
     buffer_wheel.style.setProperty('--load-3', calculate_colour(0.05, 0.05, 0.5, 255));
 
     for (let i = 0; i < document.getElementsByClassName('slider').length; i++) {
-        let colour = calculate_colour(random((23.4 + i) * i), random((21.5 + i) * i), 1, 255);
+        let colour = calculate_colour(random(i/3.2+5), random(i*2), 1, 255);
         document.getElementsByClassName('slider-value')[i].style.setProperty('--background-colour', colour);
         document.getElementById(`r${i + 1}`).style.setProperty('--r-colour', colour);
     }
