@@ -24,7 +24,6 @@ onmessage = function(e) {
     let expressions = e.data[1];
     let imageData = e.data[2];
     let slider_data = e.data[3];
-    console.log(slider_data[1]);
 
     //Iterate through every pixel
     try {

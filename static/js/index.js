@@ -59,15 +59,16 @@ function update_canvas(index) {
     for (let i = 0; i < expressions.length; i++) {
         expressions_array.push(expressions.item(i).value);
     }
-
+    
     let slider_data = [];
     let sliders = document.getElementsByClassName('slider');
     for (let i = 0; i < sliders.length; i++) {
         slider_data.push(parseInt(sliders.item(i).value));
     }
-
-    if (number_of_workers > 0) {
+    
+    if (number_of_workers > 25) {
         number_of_workers = 0;
+        //console.log(number_of_workers);
         worker.terminate();
         worker = new Worker('./static/js/worker.js');
         worker.onmessage = worker_onmessage;
@@ -84,8 +85,11 @@ function update_canvas(index) {
 
 function worker_onmessage(e) {
     number_of_workers--;
-    let buffer_style = document.getElementsByClassName('circles')[0].style;
-    buffer_style.display = "none";
+    //console.log(number_of_workers);
+    if (number_of_workers == 0) {
+        let buffer_style = document.getElementsByClassName('circles')[0].style;
+        buffer_style.display = "none";
+    }
 
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
