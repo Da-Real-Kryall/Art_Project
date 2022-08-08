@@ -16,7 +16,7 @@ input_data = [
    ["SunRay", "40", "0", "400"],
    ["Lime", "201", "0", "400"],
    ["Magenta", "235", "0", "400"],
-]
+].reverse();
 
 function reset_label(index) {
     document.getElementById(`v${index}`).innerHTML = input_data[index - 1][0];

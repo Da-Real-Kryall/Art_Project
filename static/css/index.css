@@ -83,6 +83,7 @@ body {
 
 #main_h1{
     background: linear-gradient(30deg, var(--main-start), var(--main-end));
+    -webkit-background-clip: text;
     background-clip: text;
     color: rgba(0, 0, 0, 0);
     width: fit-content;
@@ -90,6 +91,7 @@ body {
 }
 #expression_h1{
     background: linear-gradient(30deg, var(--expressions-start), var(--expressions-end));
+    -webkit-background-clip: text;
     background-clip: text;
     color: rgba(0, 0, 0, 0);
     width: fit-content;
@@ -237,7 +239,6 @@ input[type=range]::-webkit-slider-thumb {
     width: 25px;
     border-radius: 17.5px;
     cursor:grab;
-    margin-top: -14px; /* You need to specify a margin in Chrome, but in Firefox and IE it is automatic */
   }
   /* All the same stuff for Firefox */
   input[type=range]::-moz-range-thumb {
