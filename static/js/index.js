@@ -27,7 +27,7 @@ input_data = [
     ["Glare", "0", "-64", "64"],
     ["Shear", "0", "-100", "380"],
     ["Lens", "0", "-80", "50"],
-    ["Blur", "80", "0", "120"],
+    ["Clarity", "80", "0", "120"],
     ["WIP", "0", "-100", "100"],
 ]
 
@@ -43,7 +43,7 @@ function onload() {
         div.innerHTML = div.innerHTML + `
         <span class="magic-slider">
         <input type="range" min="${input_data[i][2]}" max="${input_data[i][3]}" value="${input_data[i][1]}" class="slider" id="r${i + 1}" oninput="update_canvas(${i + 1})" onmouseup="reset_label(${i + 1})">
-        <div class="slider-value" id="v${i + 1}">${input_data[i][0]}</div>
+        <div class="slider-value"><h1 class="slider_text" id="v${i + 1}">${input_data[i][0]}</h1></div>
         </span>`;
     }
     update_canvas(0);
@@ -104,13 +104,13 @@ function reset_sliders() {
             document.getElementById(`r${i + 1}`).value = input_data[i][1];
             update_canvas(0);
             
-        }, i*100);
+        }, i*(600/input_data.length));
     }
     setTimeout(() => {
         number_of_workers = 0;
         let buffer_style = document.getElementsByClassName('circles')[0].style;
         buffer_style.display = "none";
-    }, (input_data.length+1)*100);
+    }, (input_data.length+1)*(600/input_data.length));
 
 }
 
@@ -170,9 +170,11 @@ function update_gradients() {
     buffer_wheel.style.setProperty('--load-3', calculate_colour(0.05, 0.05, 0.5, 255));
 
     for (let i = 0; i < document.getElementsByClassName('slider').length; i++) {
-        let colour = calculate_colour(random(i/3.2+5), random(i*2), 1, 255);
-        document.getElementsByClassName('slider-value')[i].style.setProperty('--background-colour', colour);
-        document.getElementById(`r${i + 1}`).style.setProperty('--r-colour', colour);
+        let colour_1 = calculate_colour(random(i/3.2+5), random(i*2), 1, 255);
+        let colour_2 = calculate_colour(random(23.3*i/3.2+5), random(i*4), 1, 255);
+        document.getElementsByClassName('slider-value')[i].style.setProperty('--background-colour-1', colour_1);
+        document.getElementsByClassName('slider-value')[i].style.setProperty('--background-colour-2', colour_2);
+        document.getElementById(`r${i + 1}`).style.setProperty('--r-colour', colour_1);
     }
 
     body.style.setProperty('--reset-shade', calculate_colour(random(53.4), random(187.7), 1, 0));

@@ -28,7 +28,8 @@
 
     --r-colour: rgb(255, 255, 255);
 
-    --background-colour: #fff;
+    --background-colour-1: rgb(0, 0, 0);
+    --background-colour-2: rgb(0, 0, 0);
 
     --reset-shade: #000;
 }
@@ -160,9 +161,6 @@ body {
     box-shadow: inset 0px -25px 100px -40px rgb(0, 0, 0);
     border-radius: 14px 14px 0px 0px;
     
-
-    
-    
     margin: 20px;
     margin-bottom: 0px;
     padding-left: 16px;
@@ -271,8 +269,22 @@ body {
     background-color: #525252;
     box-shadow: inset 0px -25px 100px -40px rgb(0, 0, 0);
 }
+
+.slider_text {
+    background: linear-gradient(30deg, var(--background-colour-1), var(--background-colour-2));
+    -webkit-background-clip: text;
+    color: rgba(0, 0, 0, 0);
+
+    text-align: center;
+    font-size: 25px;
+
+    font-family: 'Inconsolata', monospace;
+    font-weight: 550;
+
+    margin: 0;
+}
+
 .slider-value {
-    color: var(--background-colour);
     box-shadow: inset -10px -20px 40px -20px rgba(0, 0, 0, 0.5);
     
     border-radius: 5px;
@@ -287,11 +299,6 @@ body {
     padding: 2px;
     padding-left: 4px;
     padding-right: 4px;
-    text-align: center;
-    font-size: 25px;
-
-    font-family: 'Inconsolata', monospace;
-    font-weight: 550;
 
     justify-content: center;
 }
