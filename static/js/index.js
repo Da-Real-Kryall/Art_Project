@@ -21,12 +21,14 @@ input_data = [
         ]
     */
 
-    ["Magenta", "235", "0", "400"],
+    ["Magenta", "235", "-100", "500"],
     ["Lime", "201", "0", "500"],
     ["SunRay", "40", "0", "400"],
     ["Glare", "0", "-64", "64"],
     ["Shear", "0", "-100", "380"],
-    ["WIP", "0", "-200", "50"],
+    ["Lens", "0", "-80", "50"],
+    ["Blur", "80", "0", "120"],
+    ["WIP", "0", "-100", "100"],
 ]
 
 function reset_label(index) {
@@ -95,6 +97,22 @@ function update_canvas(index) {
     worker.postMessage([size, expressions_array, imageData, slider_data]);
 }
 
+function reset_sliders() {
+    number_of_workers = 4;
+    for (let i = 0; i < input_data.length; i++) {
+        setTimeout(() => {
+            document.getElementById(`r${i + 1}`).value = input_data[i][1];
+            update_canvas(0);
+            
+        }, i*100);
+    }
+    setTimeout(() => {
+        number_of_workers = 0;
+        let buffer_style = document.getElementsByClassName('circles')[0].style;
+        buffer_style.display = "none";
+    }, (input_data.length+1)*100);
+
+}
 
 function worker_onmessage(e) {
     number_of_workers--;
@@ -115,8 +133,8 @@ function worker_onmessage(e) {
 
 // Set css gradients to points on the image
 function update_gradients() {
-    let main_h1 = document.getElementById('main_h1');
-    let expression_h1 = document.getElementById('expression_h1');
+    let reset_h1 = document.getElementById('reset_h1');
+    //let expression_h1 = document.getElementById('expression_h1');
 
     let canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
@@ -129,11 +147,16 @@ function update_gradients() {
         let b = imageData[2];
         return `rgba(${init * (1 - ratio) + ratio * r}, ${init * (1 - ratio) + ratio * g}, ${init * (1 - ratio) + ratio * b}, ${255})`;
     }
-
+    
+    
+    reset_h1.style.setProperty('--reset-start', calculate_colour(0.2, 0.2, 0.8, 255));
+    reset_h1.style.setProperty('--reset-end', calculate_colour(0.8, 0.8, 0.8, 255));
+    /*
     main_h1.style.setProperty('--main-start', calculate_colour(0.2, 0.2, 0.8, 255));
     main_h1.style.setProperty('--main-end', calculate_colour(0.8, 0.8, 0.8, 255));
     expression_h1.style.setProperty('--expressions-start', calculate_colour(0.8, 0.2, 0.8, 255));
     expression_h1.style.setProperty('--expressions-end', calculate_colour(0.2, 0.8, 0.8, 255));
+    */
 
     let body = document.querySelector('body');
     body.style.setProperty('--bg-top-left', calculate_colour(0.625, 0.1, 0.4, 0));
@@ -151,6 +174,8 @@ function update_gradients() {
         document.getElementsByClassName('slider-value')[i].style.setProperty('--background-colour', colour);
         document.getElementById(`r${i + 1}`).style.setProperty('--r-colour', colour);
     }
+
+    body.style.setProperty('--reset-shade', calculate_colour(random(53.4), random(187.7), 1, 0));
 }
 worker.onmessage = worker_onmessage;
 

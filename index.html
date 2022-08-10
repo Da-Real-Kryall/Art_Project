@@ -17,19 +17,20 @@
     <script src="static/js/index.js"></script> 
   </head>
   <body onload="update_canvas()">
-
+    <!--
     <header class="main_header">
       <h1 id="main_h1">Artwork</h1>
     </header>
-
+    -->
+    
     <div class="canvas_container">
       <canvas id="canvas" width="400" height="400"></canvas>
     </div>
     
     <div class="controller_menu">
-
+      
       <header class="expressions_header">
-        <h1 id="expression_h1" >Magic Sliders:</h1>
+        <!--<h1 id="expression_h1" >Magic Sliders:</h1>-->
         <div class="circles" title="Loading...">
           <div id="circle_1" class="circle"></div>
           <div id="circle_2" class="circle"></div>
@@ -40,27 +41,29 @@
           <div id="tooltip_box"></div>
         </div>
       </header>
-
+      
       <div id="expressions_list">
-
         
-
-
+        
+        
+        
         <!--
-        <input class="expression" type="text" oninput="update_canvas()" value="r = round(((x+1)*y/4)%40) <= 30 ? 255 : 1">
-        <input class="expression" type="text" oninput="update_canvas()" value="g = round((y+1)/size*240)">
-        <input class="expression" type="text" oninput="update_canvas()" value="g += (round((x+1)*y/4)%50 <= 5) ? 255 : 1">
-        <input class="expression" type="text" oninput="update_canvas()" value="g += (40 <= x && x <=150) ? 80 : 0">
-        <input class="expression" type="text" oninput="update_canvas()" value="b = round((x+1)/size*235)">
-        <input class="expression" type="text" oninput="update_canvas()" value="b += (round((x+1)*y/2)%50 <= 10) ? 255 : 1">
-        <input class="expression" type="text" oninput="update_canvas()" value="b += (x < 100) ? 120 : 0">
-        <input class="expression" type="text" oninput="update_canvas()" value="lp = 120*((280 + round((x+1)/4)) <= y && y <= (350 + round((x+1)/8)) )">
-        <input class="expression" type="text" oninput="update_canvas()" value="r -= lp; g -= lp ">
-        <input class="expression" type="text" oninput="update_canvas()" value="lp = 200*((-10 + round((y+1)/6))<= x && x <= (0 + round((y+1)/4) ))">
+          <input class="expression" type="text" oninput="update_canvas()" value="r = round(((x+1)*y/4)%40) <= 30 ? 255 : 1">
+          <button class="reset_button" onclick="reset_sliders()">Reset Sliders</button>
+          <input class="expression" type="text" oninput="update_canvas()" value="g = round((y+1)/size*240)">
+          <input class="expression" type="text" oninput="update_canvas()" value="g += (round((x+1)*y/4)%50 <= 5) ? 255 : 1">
+          <input class="expression" type="text" oninput="update_canvas()" value="g += (40 <= x && x <=150) ? 80 : 0">
+          <input class="expression" type="text" oninput="update_canvas()" value="b = round((x+1)/size*235)">
+          <input class="expression" type="text" oninput="update_canvas()" value="b += (round((x+1)*y/2)%50 <= 10) ? 255 : 1">
+          <input class="expression" type="text" oninput="update_canvas()" value="b += (x < 100) ? 120 : 0">
+          <input class="expression" type="text" oninput="update_canvas()" value="lp = 120*((280 + round((x+1)/4)) <= y && y <= (350 + round((x+1)/8)) )">
+          <input class="expression" type="text" oninput="update_canvas()" value="r -= lp; g -= lp ">
+          <input class="expression" type="text" oninput="update_canvas()" value="lp = 200*((-10 + round((y+1)/6))<= x && x <= (0 + round((y+1)/4) ))">
         <input class="expression" type="text" oninput="update_canvas()" value="r -= lp; g += lp; b += lp">
         -->
       </div>
       <div class="expressions_footer">
+        <button class="reset_button" onclick="reset_sliders()"><h1 id="reset_h1">Reset Sliders</h1></button>
         <!--for bottom of controller menu-->
       </div>
 

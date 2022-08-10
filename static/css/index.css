@@ -10,6 +10,12 @@
     --expressions-start: rgb(41, 4, 174);
     --expressions-end: rgb(205, 2, 2);
     */
+
+
+
+    --reset-start: rgb(255, 255, 255);
+    --reset-end: rgb(255, 255, 255);
+
     --bg-top-left: rgb(86, 86, 86);
     --bg-top-right: rgb(86, 86, 86);
     --bg-bottom-left: rgb(86, 86, 86);
@@ -23,6 +29,8 @@
     --r-colour: rgb(255, 255, 255);
 
     --background-colour: #fff;
+
+    --reset-shade: #000;
 }
 @keyframes fading-in {
     0% { opacity: 0; }
@@ -48,7 +56,7 @@
 
 .circles {
     float: right;
-    margin-top: -36px;
+    margin-top: 26px;
     margin-right: 8px;
 }
 
@@ -80,7 +88,7 @@ body {
     padding: 0;
     background: linear-gradient(to top left, var(--bg-bottom-right), rgba(0, 0, 0, 0), var(--bg-top-left)), linear-gradient(to top right, var(--bg-bottom-left), rgba(0, 0, 0, 0), var(--bg-top-right)) var(--bg-centre);
 }
-
+/*
 #main_h1{
     background: linear-gradient(30deg, var(--main-start), var(--main-end));
     -webkit-background-clip: text;
@@ -97,7 +105,6 @@ body {
     width: fit-content;
     margin: 10px;
 }
-
 .main_header {
     
     background-color: #303030;
@@ -113,14 +120,14 @@ body {
     height: 70px;
     padding: 5px;
     margin: 0;
-}
+}*/
 
 .canvas_container {
     display: flex;
     flex-flow: row;
     float: right;
     width: 60%;
-    height: calc(100vh - (80px));
+    height: 100vh;
 }
 
 #canvas {
@@ -130,8 +137,9 @@ body {
     height: 88%;
     image-rendering: pixelated;
 }
+
 .controller_menu {
-    height: calc(100vh - (80px));
+    height: 100vh;
     align-items: left;
     width: 40%;
     
@@ -141,36 +149,102 @@ body {
     
 }
 .expressions_header {
+    /*
     font-family: 'Inconsolata', monospace;
     font-weight: 700;
     font-size: 20px;
+    */
     
     background-color: #525252;
     color: #fff;
     box-shadow: inset 0px -25px 100px -40px rgb(0, 0, 0);
     border-radius: 14px 14px 0px 0px;
     
+
     
     
-    margin: 10px;
+    margin: 20px;
     margin-bottom: 0px;
     padding-left: 16px;
+    height: 80px;
 }
 
 .expressions_footer {
-    height: 20px;
     
     background-color: #525252;
-    box-shadow: inset 0px -25px 100px -40px rgb(0, 0, 0);
+    box-shadow: inset 0px 5px 100px -40px rgb(0, 0, 0);
     border-radius: 0px 0px 14px 14px;
     
-    margin: 10px;
+    height: 80px;
+    margin: 20px;
     margin-top: 0px;
+    
+    justify-content: left;
+    display: flex;
 }
+
+.reset_button {
+    margin-bottom: auto;
+    margin-top: auto;
+    margin-left: 15px;
+
+    padding: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+
+    border-radius: 10px;
+    border-width: 0;
+
+    box-shadow: inset 0px 0px 18px rgb(47, 47, 47),
+                0px 0px 8px rgb(29, 29, 29);
+    background-color: #525252;
+
+    
+}
+
+.reset_button:hover {
+    box-shadow: inset 0px 0px 18px rgb(47, 47, 47),
+                0px 0px 8px rgb(29, 29, 29),
+                0px 0px 8px rgb(29, 29, 29);
+}
+/* when reset button is being pressed*/
+.reset_button:active {
+    background-color: #424242;
+}
+    
+#reset_h1 {
+    font: 1.3em "carter one";
+    font-weight: 500;
+    margin: 2px;
+    
+    background: linear-gradient(30deg, var(--reset-start), var(--reset-end));
+    -webkit-background-clip: text;
+    color: rgba(0, 0, 0, 0);
+    width: fit-content;
+}
+    
+/*
+.reset_button {
+    margin-bottom: auto;
+    font: 1.2em 'Inconsolata', cursive;
+    font-weight: 600;
+    margin-top: auto;
+    margin-left: 20px;
+    height: 40px;
+    padding-left: 10px;
+    padding-right: 10px;
+    width: auto;
+    border-radius: 18px;
+    border-style: hidden;
+    box-shadow: inset -2px 0px 30px -5px var(--reset-shade),
+                inset -5px -5px 15px 2px #000,
+                0px 0px 10px 0px rgb(58, 58, 58);
+    background-color:rgb(86, 86, 86);
+}*/
 
 #expressions_list {
 
-    margin: 10px;
+    margin: 20px;
     margin-top: 0px;
     margin-bottom: 0px;
 
@@ -179,6 +253,8 @@ body {
     overflow-y: scroll;
 
     background-color: #414046;
+    box-shadow: inset -5px -20px 80px 0px rgb(57, 57, 57),
+    inset 0px -10px 20px -5px rgb(0,0,0);
 }
 .magic-slider {
     display: flex;
