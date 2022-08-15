@@ -200,9 +200,7 @@ function loopIndex(i) {
         const max = slider.max;
         const min = slider.min;
         const range = max - min;
-        console.log(max, min);
         const interval = setInterval(() => {
-            console.log(slider.value);
             if (slider.value < parseInt(max)) {
                 slider.value = parseFloat(slider.value) + range / 50;
             } else {
@@ -212,5 +210,4 @@ function loopIndex(i) {
         }, 100);
         loops.set(i, interval);
     }
-    console.log(slider);
 }
