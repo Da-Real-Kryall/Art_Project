@@ -1,6 +1,7 @@
 const size = 400
 var worker = new Worker('./static/js/worker.js');
 var number_of_workers = 0;
+const loops = new Map();
 
 /*not implemented yet, ignore for now
 
@@ -106,6 +107,12 @@ function reset_sliders() {
     number_of_workers = 4;
     for (let i = 0; i < input_data.length; i++) {
         setTimeout(() => {
+            const loop = loops.get(i + 1);
+            if (loop) {
+                clearInterval(loop);
+                loops.delete(i + 1);
+                reset_label(i + 1);
+            };
             document.getElementById(`r${i + 1}`).value = input_data[i][1];
             update_canvas(0);
 
@@ -186,7 +193,6 @@ function update_gradients() {
 }
 worker.onmessage = worker_onmessage;
 
-const loops = new Map();
 
 function loopIndex(i) {
     const slider = document.getElementById(`r${i}`);
@@ -196,6 +202,7 @@ function loopIndex(i) {
     if (interval) {
         clearInterval(interval);
         loops.delete(i);
+        reset_label(i);
     } else {
         const max = slider.max;
         const min = slider.min;
