@@ -1,6 +1,7 @@
 const size = 400
 var worker = new Worker('./static/js/worker.js');
 var number_of_workers = 0;
+const loops = new Map();
 
 /*not implemented yet, ignore for now
 
@@ -46,8 +47,11 @@ function onload() {
         <span class="magic-slider">
         <input type="range" min="${input_data[i][2]}" max="${input_data[i][3]}" value="${input_data[i][1]}" step="${input_data[i][4]}" class="slider" id="r${i + 1}" oninput="update_canvas(${i + 1})" onmouseup="reset_label(${i + 1})">
         <div class="slider-value"><h1 class="slider_text" id="v${i + 1}">${input_data[i][0]}</h1></div>
+        <div class="slider-loop" onclick="loopIndex(${i + 1})"><h1 class="slider_text" >∞</h1></div>
         </span>`;
     }
+
+
     update_canvas(0);
 }
 document.addEventListener("DOMContentLoaded", onload);
@@ -75,13 +79,13 @@ function update_canvas(index) {
     for (let i = 0; i < expressions.length; i++) {
         expressions_array.push(expressions.item(i).value);
     }
-    
+
     let slider_data = [];
     let sliders = document.getElementsByClassName('slider');
     for (let i = 0; i < sliders.length; i++) {
         slider_data.push(parseFloat(sliders.item(i).value));
     }
-    
+
     if (number_of_workers > 5) {
         number_of_workers = 0;
         //console.log(number_of_workers);
@@ -103,16 +107,22 @@ function reset_sliders() {
     number_of_workers = 4;
     for (let i = 0; i < input_data.length; i++) {
         setTimeout(() => {
+            const loop = loops.get(i + 1);
+            if (loop) {
+                clearInterval(loop);
+                loops.delete(i + 1);
+                reset_label(i + 1);
+            };
             document.getElementById(`r${i + 1}`).value = input_data[i][1];
             update_canvas(0);
-            
-        }, i*(600/input_data.length));
+
+        }, i * (600 / input_data.length));
     }
     setTimeout(() => {
         number_of_workers = 0;
         let buffer_style = document.getElementsByClassName('circles')[0].style;
         buffer_style.display = "none";
-    }, (input_data.length+1)*(600/input_data.length));
+    }, (input_data.length + 1) * (600 / input_data.length));
 
 }
 
@@ -149,8 +159,8 @@ function update_gradients() {
         let b = imageData[2];
         return `rgba(${init * (1 - ratio) + ratio * r}, ${init * (1 - ratio) + ratio * g}, ${init * (1 - ratio) + ratio * b}, ${255})`;
     }
-    
-    
+
+
     reset_h1.style.setProperty('--reset-start', calculate_colour(0.2, 0.2, 0.8, 255));
     reset_h1.style.setProperty('--reset-end', calculate_colour(0.8, 0.8, 0.8, 255));
     /*
@@ -172,8 +182,8 @@ function update_gradients() {
     buffer_wheel.style.setProperty('--load-3', calculate_colour(0.05, 0.05, 0.5, 255));
 
     for (let i = 0; i < document.getElementsByClassName('slider').length; i++) {
-        let colour_1 = calculate_colour(random(i/3.2+5), random(i*2), 1, 255);
-        let colour_2 = calculate_colour(random(23.3*i/3.2+5), random(i*4), 1, 255);
+        let colour_1 = calculate_colour(random(i / 3.2 + 5), random(i * 2), 1, 255);
+        let colour_2 = calculate_colour(random(23.3 * i / 3.2 + 5), random(i * 4), 1, 255);
         document.getElementsByClassName('slider-value')[i].style.setProperty('--background-colour-1', colour_1);
         document.getElementsByClassName('slider-value')[i].style.setProperty('--background-colour-2', colour_2);
         document.getElementById(`r${i + 1}`).style.setProperty('--r-colour', colour_1);
@@ -183,3 +193,28 @@ function update_gradients() {
 }
 worker.onmessage = worker_onmessage;
 
+
+function loopIndex(i) {
+    const slider = document.getElementById(`r${i}`);
+
+    const interval = loops.get(i);
+
+    if (interval) {
+        clearInterval(interval);
+        loops.delete(i);
+        reset_label(i);
+    } else {
+        const max = slider.max;
+        const min = slider.min;
+        const range = max - min;
+        const interval = setInterval(() => {
+            if (slider.value < parseInt(max)) {
+                slider.value = parseFloat(slider.value) + range / 50;
+            } else {
+                slider.value = min;
+            }
+            update_canvas(i);
+        }, 100);
+        loops.set(i, interval);
+    }
+}

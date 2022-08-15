@@ -293,6 +293,26 @@ body {
     width:120px;
     margin: auto;
     margin-left: 0;
+    margin-right: 12px;
+    height: 65%;
+    overflow-x: hidden;
+    padding: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+
+    justify-content: center;
+}
+
+.slider-loop {
+
+    box-shadow: inset -10px -20px 40px -20px rgba(0, 0, 0, 0.5);
+    
+    border-radius: 5px;
+    border-style: none;
+
+    width: 40px;
+    margin: auto;
+    margin-left: 0;
     margin-right: 2%;
     height: 65%;
     overflow-x: hidden;
@@ -301,6 +321,7 @@ body {
     padding-right: 4px;
 
     justify-content: center;
+    cursor: pointer;
 }
 .expression {
     font-family: 'Inconsolata', monospace;
