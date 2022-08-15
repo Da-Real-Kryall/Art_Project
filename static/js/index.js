@@ -18,17 +18,19 @@ input_data = [
             "Default Value",
             "Min Value",
             "Max Value",
+            "Step"
         ]
     */
 
-    ["Magenta", "235", "-100", "500"],
-    ["Lime", "201", "0", "500"],
-    ["SunRay", "40", "0", "400"],
-    ["Glare", "0", "-64", "64"],
-    ["Shear", "0", "-100", "380"],
-    ["Lens", "0", "-80", "50"],
-    ["Clarity", "80", "0", "120"],
-    ["WIP", "0", "-100", "100"],
+    ["Magenta", "235", "-100", "500", "1"],
+    ["Lime", "201", "0", "500", "1"],
+    ["SunRay", "40", "0", "400", "1"],
+    ["Glare", "0", "-64", "64", "1"],
+    ["Shear", "0", "-100", "380", "1"],
+    ["Lens", "0", "-80", "50", "1"],
+    ["Clarity", "80", "0", "120", "1"],
+    ["Zoom", "1", "0", "2", "0.01"],
+    ["Skew", "1", "1", "1.25", "0.01"],
 ]
 
 function reset_label(index) {
@@ -42,7 +44,7 @@ function onload() {
     for (let i = 0; i < input_data.length; i++) {
         div.innerHTML = div.innerHTML + `
         <span class="magic-slider">
-        <input type="range" min="${input_data[i][2]}" max="${input_data[i][3]}" value="${input_data[i][1]}" class="slider" id="r${i + 1}" oninput="update_canvas(${i + 1})" onmouseup="reset_label(${i + 1})">
+        <input type="range" min="${input_data[i][2]}" max="${input_data[i][3]}" value="${input_data[i][1]}" step="${input_data[i][4]}" class="slider" id="r${i + 1}" oninput="update_canvas(${i + 1})" onmouseup="reset_label(${i + 1})">
         <div class="slider-value"><h1 class="slider_text" id="v${i + 1}">${input_data[i][0]}</h1></div>
         </span>`;
     }
@@ -77,7 +79,7 @@ function update_canvas(index) {
     let slider_data = [];
     let sliders = document.getElementsByClassName('slider');
     for (let i = 0; i < sliders.length; i++) {
-        slider_data.push(parseInt(sliders.item(i).value));
+        slider_data.push(parseFloat(sliders.item(i).value));
     }
     
     if (number_of_workers > 5) {

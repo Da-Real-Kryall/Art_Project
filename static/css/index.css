@@ -127,7 +127,7 @@ body {
     display: flex;
     flex-flow: row;
     float: right;
-    width: 60%;
+    width: 56%;
     height: 100vh;
 }
 
@@ -135,14 +135,14 @@ body {
     padding: 0;
     margin: auto;
     display: block;
-    height: 88%;
+    height: 53vw;
     image-rendering: pixelated;
 }
 
 .controller_menu {
     height: 100vh;
     align-items: left;
-    width: 40%;
+    width: 44%;
     
     display: flex;
     float: left;
