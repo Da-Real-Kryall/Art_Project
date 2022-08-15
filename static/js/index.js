@@ -35,7 +35,7 @@ input_data = [
 ]
 
 function reset_label(index) {
-    update_canvas(index);
+    update_canvas(index, true);
     document.getElementById(`v${index}`).innerHTML = input_data[index - 1][0];
 }
 
@@ -45,14 +45,14 @@ function onload() {
     for (let i = 0; i < input_data.length; i++) {
         div.innerHTML = div.innerHTML + `
         <span class="magic-slider">
-        <input type="range" min="${input_data[i][2]}" max="${input_data[i][3]}" value="${input_data[i][1]}" step="${input_data[i][4]}" class="slider" id="r${i + 1}" oninput="update_canvas(${i + 1})" onmouseup="reset_label(${i + 1})">
+        <input type="range" min="${input_data[i][2]}" max="${input_data[i][3]}" value="${input_data[i][1]}" step="${input_data[i][4]}" class="slider" id="r${i + 1}" oninput="update_canvas(${i + 1}, false)" onmouseup="reset_label(${i + 1})">
         <div class="slider-value"><h1 class="slider_text" id="v${i + 1}">${input_data[i][0]}</h1></div>
-        <div class="slider-loop" onclick="loopIndex(${i + 1})"><h1 class="slider_text" >∞</h1></div>
+        <div class="slider-loop" id="l${i + 1}" onclick="loopIndex(${i + 1})"><h1 class="slider_text" >▶</h1></div>
         </span>`;
     }
 
 
-    update_canvas(0);
+    update_canvas(0, true);
 }
 document.addEventListener("DOMContentLoaded", onload);
 
@@ -62,7 +62,7 @@ function random(seed) {
     return x - Math.floor(x);
 }
 
-function update_canvas(index) {
+function update_canvas(index, force) {
     const canvas = document.getElementById('canvas');
     const ctx = canvas.getContext('2d');
     const expression_list = document.getElementById('expressions_list');
@@ -86,50 +86,60 @@ function update_canvas(index) {
         slider_data.push(parseFloat(sliders.item(i).value));
     }
 
-    if (number_of_workers > 5) {
-        number_of_workers = 0;
-        //console.log(number_of_workers);
-        worker.terminate();
-        worker = new Worker('./static/js/worker.js');
-        worker.onmessage = worker_onmessage;
-    } else {
+    //if (number_of_workers > 4) {
+        //number_of_workers = 0;
+        ////console.log(number_of_workers);
+        //worker.terminate();
+        //worker = new Worker('./static/js/worker.js');
+        //worker.onmessage = worker_onmessage;
+    //} else 
+    if (loops.size == 0 && number_of_workers == 0) {
         let buffer_style = document.getElementsByClassName('circles')[0].style;
         buffer_style.animation = 'fading-in 0.5s 1';
         buffer_style.display = "block";
     }
+    //let buffer_style = document.getElementsByClassName('circles')[0].style;
+    //buffer_style.animation = 'fading-in 0.5s 1';
+    //buffer_style.display = "block";
 
-    number_of_workers++;
     //foo = (foo + 1)%32;
-    worker.postMessage([size, expressions_array, imageData, slider_data]);
+    if (number_of_workers < 1 || force) {
+        number_of_workers++;
+        worker.postMessage([size, expressions_array, imageData, slider_data]);
+    }
+    
 }
 
 function reset_sliders() {
-    number_of_workers = 4;
     for (let i = 0; i < input_data.length; i++) {
         setTimeout(() => {
+            let buffer_style = document.getElementsByClassName('circles')[0].style;
+            buffer_style.animation = 'fading-in 0.5s 1';
+            buffer_style.display = "block";
             const loop = loops.get(i + 1);
             if (loop) {
                 clearInterval(loop);
                 loops.delete(i + 1);
                 reset_label(i + 1);
+                document.getElementById(`l${i+1}`).childNodes[0].textContent = "▶";//■
             };
             document.getElementById(`r${i + 1}`).value = input_data[i][1];
-            update_canvas(0);
+            update_canvas(0, true);
 
         }, i * (600 / input_data.length));
     }
-    setTimeout(() => {
-        number_of_workers = 0;
-        let buffer_style = document.getElementsByClassName('circles')[0].style;
-        buffer_style.display = "none";
-    }, (input_data.length + 1) * (600 / input_data.length));
+    //setTimeout(() => {
+    //    //let buffer_style = document.getElementsByClassName('circles')[0].style;
+    //    //buffer_style.display = "none";
+    //    
+    //}, (input_data.length + 1) * (600 / input_data.length));
 
 }
 
 function worker_onmessage(e) {
     number_of_workers--;
     //console.log(number_of_workers);
-    if (number_of_workers == 0) {
+    if (number_of_workers == 0 && loops.size == 0) {
         let buffer_style = document.getElementsByClassName('circles')[0].style;
         buffer_style.display = "none";
     }
@@ -187,6 +197,8 @@ function update_gradients() {
         document.getElementsByClassName('slider-value')[i].style.setProperty('--background-colour-1', colour_1);
         document.getElementsByClassName('slider-value')[i].style.setProperty('--background-colour-2', colour_2);
         document.getElementById(`r${i + 1}`).style.setProperty('--r-colour', colour_1);
+        document.getElementById(`l${i + 1}`).style.setProperty('--background-colour-1', colour_2);
+        document.getElementById(`l${i + 1}`).style.setProperty('--background-colour-2', colour_2);
     }
 
     body.style.setProperty('--reset-shade', calculate_colour(random(53.4), random(187.7), 1, 0));
@@ -203,18 +215,26 @@ function loopIndex(i) {
         clearInterval(interval);
         loops.delete(i);
         reset_label(i);
+        document.getElementById(`l${i}`).childNodes[0].textContent = "▶";//■
     } else {
+        
+        
         const max = slider.max;
         const min = slider.min;
         const range = max - min;
+        const step = slider.step;
         const interval = setInterval(() => {
-            if (slider.value < parseInt(max)) {
-                slider.value = parseFloat(slider.value) + range / 50;
+            if (slider.value < parseFloat(max)) {
+                slider.value = parseFloat(slider.value) + Math.round((range/50)/step)*step;
             } else {
                 slider.value = min;
             }
-            update_canvas(i);
+            update_canvas(i, false);
         }, 100);
+        let buffer_style = document.getElementsByClassName('circles')[0].style;
+        buffer_style.animation = 'fading-in 0.5s 1';
+        buffer_style.display = "block";
+        document.getElementById(`l${i}`).childNodes[0].textContent = "■";//▶
         loops.set(i, interval);
     }
 }
