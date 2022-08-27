@@ -3,14 +3,6 @@ var worker = new Worker('./static/js/worker.js');
 var number_of_workers = 0;
 const loops = new Map();
 
-/*not implemented yet, ignore for now
-
-//used to make every second/third/fourth change of a slider be actually calculated (though the last change before letting go is always calculated)
-//(idk what to name it, pr's welcome)
-var foo = 0;
-
-*/
-
 //initialize input sliders
 input_data = [
     /*
@@ -23,13 +15,13 @@ input_data = [
         ]
     */
 
-    ["Magenta", "235", "-100", "500", "1"],
+    ["Navy", "235", "-100", "500", "1"],
     ["Lime", "201", "0", "500", "1"],
     ["SunRay", "40", "0", "400", "1"],
     ["Glare", "0", "-64", "64", "1"],
     ["Shear", "0", "-100", "380", "1"],
     ["Lens", "0", "-80", "50", "1"],
-    ["Clarity", "80", "0", "120", "1"],
+    ["Blur", "80", "0", "120", "1"],
     ["Zoom", "1", "0", "2", "0.01"],
     ["Skew", "1", "1", "1.25", "0.01"],
 ]
@@ -45,7 +37,7 @@ function onload() {
     for (let i = 0; i < input_data.length; i++) {
         div.innerHTML = div.innerHTML + `
         <span class="magic-slider">
-        <input type="range" min="${input_data[i][2]}" max="${input_data[i][3]}" value="${input_data[i][1]}" step="${input_data[i][4]}" class="slider" id="r${i + 1}" oninput="update_canvas(${i + 1}, false)" onmouseup="reset_label(${i + 1})">
+        <input type="range" min="${input_data[i][2]}" max="${input_data[i][3]}" value="${input_data[i][1]}" step="${input_data[i][4]}" class="slider" id="r${i + 1}" oninput="update_canvas(${i + 1}, false)" onpointerup="reset_label(${i + 1})" onmouseup="reset_label(${i + 1})">
         <div class="slider-value"><h1 class="slider_text" id="v${i + 1}">${input_data[i][0]}</h1></div>
         <div class="slider-loop" id="l${i + 1}" onclick="loopIndex(${i + 1})"><h1 class="slider_text" >▶</h1></div>
         </span>`;
