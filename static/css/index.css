@@ -73,6 +73,7 @@
 #circle_3 {animation-delay: -0.5s;}
 #circle_4 {animation-delay: -0.75s;}
 #circle_5 {animation-delay: -1s;}
+#circle_6 {animation-delay: -0.001s;}
 
 #tooltip_box {
     animation: none;
@@ -84,9 +85,12 @@
 }
 
 body {
+    margin-top: 0%;
     height: 100%;
     margin: 0;
     padding: 0;
+    overflow-y:hidden;
+    overflow-x:hidden;
     background: linear-gradient(to top left, var(--bg-bottom-right), rgba(0, 0, 0, 0), var(--bg-top-left)), linear-gradient(to top right, var(--bg-bottom-left), rgba(0, 0, 0, 0), var(--bg-top-right)) var(--bg-centre);
 }
 /*
@@ -140,10 +144,10 @@ body {
 }
 
 .controller_menu {
-    height: 100vh;
+    height: 95vh;
     align-items: left;
     width: 44%;
-    
+    margin-top: 2.5vh;
     display: flex;
     float: left;
     flex-flow: column;
@@ -161,7 +165,7 @@ body {
     box-shadow: inset 0px -25px 100px -40px rgb(0, 0, 0);
     border-radius: 14px 14px 0px 0px;
     
-    margin: 20px;
+    margin: 10px;
     margin-bottom: 0px;
     padding-left: 16px;
     height: 80px;
@@ -174,7 +178,7 @@ body {
     border-radius: 0px 0px 14px 14px;
     
     height: 80px;
-    margin: 20px;
+    margin: 10px;
     margin-top: 0px;
     
     justify-content: left;
@@ -242,7 +246,7 @@ body {
 
 #expressions_list {
 
-    margin: 20px;
+    margin: 10px;
     margin-top: 0px;
     margin-bottom: 0px;
 
@@ -307,7 +311,11 @@ body {
 
 .slider-loop {
 
-    box-shadow: inset -10px -20px 40px -20px rgba(0, 0, 0, 0.5);
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+    box-shadow: inset -10px -20px 40px -10px rgba(0, 0, 0, 0.5);
     
     border-radius: 5px;
     border-style: none;
@@ -318,9 +326,6 @@ body {
     margin-right: 1.5%;
     height: 65%;
     overflow-x: hidden;
-    padding: 2px;
-    padding-left: 4px;
-    padding-right: 4px;
 
     justify-content: center;
     cursor: pointer;
@@ -339,24 +344,26 @@ body {
 /* Special styling for WebKit/Blink */
 input[type=range]::-webkit-slider-thumb {
     -webkit-appearance: none;
+    box-shadow: inset 8px 5px 15px -5px rgba(0,0,0,0.7 );
     border-width: 0px;
     border-color: rgba(0,0,0,0);
-    height: 25px;
-    width: 25px;
+    height: 30px;
+    width: 30px;
     border-radius: 17.5px;
     cursor:grab;
   }
+
   /* All the same stuff for Firefox */
   input[type=range]::-moz-range-thumb {
     box-shadow: inset 8px 5px 15px -5px rgba(0,0,0,0.7 );
     border-width: 0px;
-    border-color: rgba(0,0,0,0);
+    border-color: rgba(0, 0, 0, 0);
     height: 25px;
     width: 25px;
     border-radius: 17.5px;
     cursor:grab;
   }
-  
+
   /* All the same stuff for IE */
   input[type=range]::-ms-thumb {
     box-shadow: inset 8px 5px 15px -5px rgba(0,0,0,0.7 );
