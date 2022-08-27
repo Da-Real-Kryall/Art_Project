@@ -1,0 +1,692 @@
+<!--This is the compressed, single file version used in my actual assessment.-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Artwork</title>
+
+    <meta content="Artwork" property="og:title" />
+    <meta content="Art thingy for art class" property="og:description" />
+    <meta content="#ff8383" data-react-helmet="true" name="theme-color" />
+
+    <style>
+  :root {
+    --main-start: rgb(255, 255, 255);
+    --main-end: rgb(255, 255, 255);
+    --expressions-start: rgb(255, 255, 255);
+    --expressions-end: rgb(255, 255, 255);
+
+    --reset-start: rgb(255, 255, 255);
+    --reset-end: rgb(255, 255, 255);
+
+    --bg-top-left: rgb(86, 86, 86);
+    --bg-top-right: rgb(86, 86, 86);
+    --bg-bottom-left: rgb(86, 86, 86);
+    --bg-bottom-right: rgb(86, 86, 86);
+    --bg-centre: rgb(0, 0, 0);
+
+    --load-1: #fff;
+    --load-2: #fff;
+    --load-3: #fff;
+
+    --r-colour: rgb(255, 255, 255);
+
+    --background-colour-1: rgb(0, 0, 0);
+    --background-colour-2: rgb(255, 255, 255);
+
+    --reset-shade: #000;
+}
+@keyframes fading-in {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes fading-out {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes buffer_wheel {
+    from {
+        transform: rotate(0deg) translateX(15px) rotate(0deg);
+        background-color: var(--load-1); 
+    }
+    33% {background-color: var(--load-2);}
+    66% {background-color: var(--load-3);}
+    to {
+        transform: rotate(360deg) translateX(15px) rotate(-360deg);
+        background-color: var(--load-1);
+    }
+}
+
+.circles {
+    float: right;
+    margin-top: 26px;
+    margin-right: 8px;
+}
+
+.circle {
+    position: absolute;
+    border-radius: 50%;
+    width: 10px;
+    height: 10px;
+    animation: buffer_wheel 1.5s linear infinite;
+}
+#circle_1 {animation-delay: -1.25s;}
+#circle_2 {animation-delay: -0.25s;}
+#circle_3 {animation-delay: -0.5s;}
+#circle_4 {animation-delay: -0.75s;}
+#circle_5 {animation-delay: -1s;}
+#circle_6 {animation-delay: -0.001s;}
+
+#tooltip_box {
+    animation: none;
+    padding: 25px;
+    margin-left: -20px;
+    margin-top: -20px;
+    z-index:100;
+    position: relative;
+}
+
+body {
+    margin-top: 0%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-y:hidden;
+    overflow-x:hidden;
+    background: linear-gradient(to top left, var(--bg-bottom-right), rgba(0, 0, 0, 0), var(--bg-top-left)), linear-gradient(to top right, var(--bg-bottom-left), rgba(0, 0, 0, 0), var(--bg-top-right)) var(--bg-centre);
+}
+
+.canvas_container {
+    display: flex;
+    flex-flow: row;
+    float: right;
+    width: 56%;
+    height: 100vh;
+}
+
+#canvas {
+    padding: 0;
+    margin: auto;
+    display: block;
+    height: 53vw;
+    image-rendering: pixelated;
+}
+
+.controller_menu {
+    height: 95vh;
+    align-items: left;
+    width: 44%;
+    margin-top: 2.5vh;
+    display: flex;
+    float: left;
+    flex-flow: column;
+    
+}
+.expressions_header {
+    background-color: #525252;
+    color: #fff;
+    box-shadow: inset 0px -25px 100px -40px rgb(0, 0, 0);
+    border-radius: 14px 14px 0px 0px;
+    
+    margin: 10px;
+    margin-bottom: 0px;
+    padding-left: 16px;
+    height: 80px;
+}
+
+.expressions_footer {
+    background-color: #525252;
+    box-shadow: inset 0px 5px 100px -40px rgb(0, 0, 0);
+    border-radius: 0px 0px 14px 14px;
+    
+    height: 80px;
+    margin: 10px;
+    margin-top: 0px;
+    
+    justify-content: left;
+    display: flex;
+}
+
+.reset_button {
+    margin-bottom: auto;
+    margin-top: auto;
+    margin-left: 15px;
+
+    padding: 5px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+
+    border-radius: 10px;
+    border-width: 0;
+
+    box-shadow: inset 0px 0px 18px rgb(47, 47, 47),
+                0px 0px 8px rgb(29, 29, 29);
+    background-color: #525252;    
+}
+
+.reset_button:hover {
+    box-shadow: inset 0px 0px 18px rgb(47, 47, 47),
+                0px 0px 8px rgb(29, 29, 29),
+                0px 0px 8px rgb(29, 29, 29);
+}
+/* when reset button is being pressed*/
+.reset_button:active {
+    background-color: #424242;
+}
+    
+#reset_h1 {
+    font: 1.4em "Trebuchet MS";
+    font-style: italic;
+    
+    font-weight: 600;
+    margin: 2px;
+    
+    background: linear-gradient(30deg, var(--reset-start), var(--reset-end));
+    -webkit-background-clip: text;
+    color: rgba(0, 0, 0, 0);
+    width: fit-content;
+}
+
+#expressions_list {
+    margin: 10px;
+    margin-top: 0px;
+    margin-bottom: 0px;
+
+    height: 100%;
+
+    overflow-y: scroll;
+
+    background-color: #414046;
+    box-shadow: inset -5px -20px 80px 0px rgb(57, 57, 57),
+    inset 0px -10px 20px -5px rgb(0,0,0);
+}
+.magic-slider {
+    display: flex;
+    height: 50px;
+}
+.slider {
+    border-radius: 10px;
+    margin: 16px;
+    margin-left: 12px;
+    margin-right: 12px;
+    height: 18px;
+    border-style: none;
+    background-color: #525252;
+    box-shadow: inset 0px -25px 100px -40px rgb(0, 0, 0);
+}
+
+.slider_text {
+    background: linear-gradient(30deg, var(--background-colour-1), var(--background-colour-2));
+    -webkit-background-clip: text;
+    color: rgba(0, 0, 0, 0);
+
+    text-align: center;
+    font-size: 22px;
+    
+    font-family: "Tahoma", monospace;
+    font-weight: 600;
+
+    margin: 0;
+}
+
+.slider-value {
+    box-shadow: inset -10px -20px 40px -20px rgba(0, 0, 0, 0.5);
+    
+    border-radius: 5px;
+    border-style: none;
+
+    width:130px;
+    margin: auto;
+    margin-left: 0;
+    margin-right: 12px;
+    height: 65%;
+    overflow-x: hidden;
+    padding: 2px;
+    
+    padding-left: 4px;
+    padding-right: 4px;
+
+    justify-content: center;
+}
+
+.slider-loop {
+    padding-top: 2px;
+    padding-bottom: 2px;
+    padding-left: 4px;
+    padding-right: 4px;
+    box-shadow: inset -10px -20px 40px -10px rgba(0, 0, 0, 0.5);
+    
+    border-radius: 5px;
+    border-style: none;
+
+    width: 40px;
+    margin: auto;
+    margin-left: 0;
+    margin-right: 1.5%;
+    height: 65%;
+    overflow-x: hidden;
+
+    justify-content: center;
+    cursor: pointer;
+}
+
+/* Special styling for WebKit/Blink */
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    box-shadow: inset 8px 5px 15px -5px rgba(0,0,0,0.7 );
+    border-width: 0px;
+    border-color: rgba(0,0,0,0);
+    height: 30px;
+    width: 30px;
+    border-radius: 17.5px;
+    cursor:grab;
+  }
+
+  /* All the same stuff for Firefox */
+  input[type=range]::-moz-range-thumb {
+    box-shadow: inset 8px 5px 15px -5px rgba(0,0,0,0.7 );
+    border-width: 0px;
+    border-color: rgba(0, 0, 0, 0);
+    height: 25px;
+    width: 25px;
+    border-radius: 17.5px;
+    cursor:grab;
+  }
+
+  /* All the same stuff for IE */
+  input[type=range]::-ms-thumb {
+    box-shadow: inset 8px 5px 15px -5px rgba(0,0,0,0.7 );
+    border-width: 0px;
+    border-color: rgba(0,0,0,0);
+    height: 25px;
+    width: 25px;
+    cursor: grab;
+}
+
+input[type=range]::-webkit-slider-thumb {background: var(--r-colour);}
+input[type=range]::-moz-range-thumb {background: var(--r-colour);}
+input[type=range]::-ms-thumb {background: var(--r-colour);}
+/*
+@for $i from 1 through 12 {
+    input[type=range]#r#{$i} {
+        &::-webkit-slider-thumb,
+        &::-moz-range-thumb,
+        &::-ms-thumb { background: var(--r#{$i}); }
+    }
+}
+*/
+
+
+/* Styles for different browsers to clear defaults */
+input[type=range] {
+    -webkit-appearance: none; /* Hides the slider so that custom slider can be made */
+    width: 100%; /* Specific width is required for Firefox. */
+    background: transparent; /* Otherwise white in Chrome */
+}
+  
+input[type=range]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+}
+  
+input[type=range]:focus {
+    outline: none; /* Removes the blue border. You should probably do some kind of focus styling for accessibility reasons though. */
+}
+  
+input[type=range]::-ms-track {
+    width: 100%;
+    cursor: pointer;
+    /* Hides the slider so custom styles can be added */
+    background: transparent; 
+    border-color: transparent;
+    color: transparent;
+}
+    </style>
+
+    <script id="worker1" type="javascript/worker">
+      function evaluate_pixel(x, y, s) {
+        let r = 0;
+        let g = 0;
+        let b = 0;
+        let size = 400;
+        let nx = ( Math.abs(x-400)*s[7]+200-1);
+        let ny = ( Math.abs(y-402)*s[7]+200-3);
+    
+        r = Math.round((nx*ny/2.5)%40-s[3]) <= 30 ? 255 : (80-s[6])*6.375;            //
+        g = Math.round((y+ (Math.abs(s[1]-200)**1.1)*Math.sign(s[1]-200) )/size*240);
+        g += (Math.round(nx*ny*s[7]/4-0.5)%50+s[3] <= 5) ? s[6]*3.1875 : 1+(80-s[6])*0.6;       //
+        g += (s[2] <= x && x <=s[2]*3.75) ? 80 : 0;
+        b = Math.round((x+1)/size*s[0]);
+        b += (Math.round(nx*ny/2-0.5)%50-s[3] <= 10) ? s[6]*3.1875 : 1+(80-s[6])*0.6;      //
+        b += (x < 60+s[2]) ? 120 : 0;
+    
+        t = 120*((280 + Math.round((x+1)/4)) <= y**s[8]+s[4]*1.4+40*((s[8]-1)*20) && y**s[8]+s[4]*1.4+40*(s[8]-1) <= (350 + Math.round((x+1)/8)) );
+        r -= t; g -= t;
+        
+        t = 200*((-10 + Math.round((y+1)/6)) <= x**(1+1-s[8])-s[4]*2.06 && x**(1+1-s[8])-s[4]*2.09 <= (0 + Math.round((y+1)/4) ));
+        r -= t; g += t; b += t;
+    
+        t = Math.max(-(Math.abs((600-(y**s[8])-Math.round(x/2))-x**s[8]+s[4]*2))+150, 0);
+        r -= t; g -= t; b -= t;
+    
+        t = Math.max(-Math.round(Math.sqrt((x-270+5*s[5])**2 + (y-100)**2))+100-s[5]*2, 0)*3 +
+            Math.max(-Math.round(Math.sqrt((x-320)**2 + (y-170+5*s[5])**2))+50-s[5]/3, 0)*4 +
+            Math.max(-Math.round(Math.sqrt((x-250-5*s[5])**2 + (y-230+5*s[5])**2))+30-s[5]/2, 0)*8;
+        r += t; g += t; b += t;
+    
+        return [r, g, b];
+    }
+    
+    // Worker script for calculating the new image
+    onmessage = function(e) {
+        //unpack data
+        let size = e.data[0];
+        let expressions = e.data[1];
+        let imageData = e.data[2];
+        let slider_data = e.data[3];
+    
+        //Iterate through every pixel
+        try {
+            for (let i = 0; i < imageData.data.length; i += 4) {
+    
+                let x = (i % (4*size))/4;
+                let y = i / (4*size);
+            
+    
+                let res = evaluate_pixel(x, y, slider_data);
+                imageData.data[i] = res[0];
+                imageData.data[i+1] = res[1];
+                imageData.data[i+2] = res[2];
+                imageData.data[i+3] = 255;
+                /*
+                let r = 0;
+                let g = 0;
+                let b = 0;
+            
+                eval(\`with (Math) {\${expressions.join("; ")}}\`);
+                // Modify pixel data
+                imageData.data[i + 0] = r;        // R value
+                imageData.data[i + 1] = g;        // G value
+                imageData.data[i + 2] = b;        // B value
+                imageData.data[i + 3] = 255;      // A value*/
+            }
+        } catch (e) {
+            postMessage(null);
+            return;
+        }
+        postMessage(imageData);
+    }
+    </script>
+    <script>
+        var blob = new Blob([
+    document.querySelector('#worker1').textContent
+  ], { type: "text/javascript" })
+
+  const size = 400
+var worker = new Worker(window.URL.createObjectURL(blob));;
+var number_of_workers = 0;
+const loops = new Map();
+
+//initialize input sliders
+input_data = [
+    /*
+        [
+            "Title",
+            "Default Value",
+            "Min Value",
+            "Max Value",
+            "Step"
+        ]
+    */
+
+    ["Navy", "235", "-100", "500", "1"],
+    ["Lime", "201", "0", "500", "1"],
+    ["SunRay", "40", "0", "400", "1"],
+    ["Glare", "0", "-64", "64", "1"],
+    ["Shear", "0", "-100", "380", "1"],
+    ["Lens", "0", "-80", "50", "1"],
+    ["Blur", "80", "0", "120", "1"],
+    ["Zoom", "1", "0", "2", "0.01"],
+    ["Skew", "1", "1", "1.25", "0.01"],
+]
+
+function reset_label(index) {
+    update_canvas(index, true);
+    document.getElementById(`v${index}`).innerHTML = input_data[index - 1][0];
+}
+
+
+function onload() {
+    var div = document.getElementById('expressions_list');
+    for (let i = 0; i < input_data.length; i++) {
+        div.innerHTML = div.innerHTML + `
+        <span class="magic-slider">
+        <input type="range" min="${input_data[i][2]}" max="${input_data[i][3]}" value="${input_data[i][1]}" step="${input_data[i][4]}" class="slider" id="r${i + 1}" oninput="update_canvas(${i + 1}, false)" onpointerup="reset_label(${i + 1})" onmouseup="reset_label(${i + 1})">
+        <div class="slider-value"><h1 class="slider_text" id="v${i + 1}">${input_data[i][0]}</h1></div>
+        <div class="slider-loop" id="l${i + 1}" onclick="loopIndex(${i + 1})"><h1 class="slider_text" style="font-size: 22px;">▶</h1></div>
+        </span>`;
+    }
+
+
+    update_canvas(0, true);
+}
+document.addEventListener("DOMContentLoaded", onload);
+
+
+function random(seed) {
+    var x = Math.sin(seed++) * 10000;
+    return x - Math.floor(x);
+}
+
+function update_canvas(index, force) {
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    const expression_list = document.getElementById('expressions_list');
+    const imageData = ctx.createImageData(size, size);
+    let expressions = expression_list.children;
+
+    //this is in a try catch block because on startup the document is null i think
+    try {
+        let slider_value = document.getElementById(`r${index}`).value;
+        document.getElementById(`v${index}`).innerHTML = slider_value;
+    } catch { }
+
+    let expressions_array = [];
+    for (let i = 0; i < expressions.length; i++) {
+        expressions_array.push(expressions.item(i).value);
+    }
+
+    let slider_data = [];
+    let sliders = document.getElementsByClassName('slider');
+    for (let i = 0; i < sliders.length; i++) {
+        slider_data.push(parseFloat(sliders.item(i).value));
+    }
+
+    //if (number_of_workers > 4) {
+        //number_of_workers = 0;
+        ////console.log(number_of_workers);
+        //worker.terminate();
+        //worker = new Worker('./static/js/worker.js');
+        //worker.onmessage = worker_onmessage;
+    //} else 
+    if (loops.size == 0 && number_of_workers == 0) {
+        let buffer_style = document.getElementsByClassName('circles')[0].style;
+        buffer_style.animation = 'fading-in 0.5s 1';
+        buffer_style.display = "block";
+    }
+    //let buffer_style = document.getElementsByClassName('circles')[0].style;
+    //buffer_style.animation = 'fading-in 0.5s 1';
+    //buffer_style.display = "block";
+
+    //foo = (foo + 1)%32;
+    if (number_of_workers < 1 || force) {
+        number_of_workers++;
+        worker.postMessage([size, expressions_array, imageData, slider_data]);
+    }
+    
+}
+
+function reset_sliders() {
+    for (let i = 0; i < input_data.length; i++) {
+        setTimeout(() => {
+            let buffer_style = document.getElementsByClassName('circles')[0].style;
+            buffer_style.animation = 'fading-in 0.5s 1';
+            buffer_style.display = "block";
+            const loop = loops.get(i + 1);
+            if (loop) {
+                clearInterval(loop);
+                loops.delete(i + 1);
+                reset_label(i + 1);
+                document.getElementById(`l${i+1}`).childNodes[0].textContent = "▶";//■
+            };
+            document.getElementById(`r${i + 1}`).value = input_data[i][1];
+            update_canvas(0, true);
+
+        }, i * (600 / input_data.length));
+    }
+    //setTimeout(() => {
+    //    //let buffer_style = document.getElementsByClassName('circles')[0].style;
+    //    //buffer_style.display = "none";
+    //    
+    //}, (input_data.length + 1) * (600 / input_data.length));
+
+}
+
+function worker_onmessage(e) {
+    number_of_workers--;
+    //console.log(number_of_workers);
+    if (number_of_workers == 0 && loops.size == 0) {
+        let buffer_style = document.getElementsByClassName('circles')[0].style;
+        buffer_style.display = "none";
+    }
+
+    const canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+    imageData = e.data;
+    if (imageData != null) {
+        ctx.putImageData(imageData, 0, 0);
+        update_gradients();
+    }
+}
+
+// Set css gradients to points on the image
+function update_gradients() {
+    let reset_h1 = document.getElementById('reset_h1');
+    //let expression_h1 = document.getElementById('expression_h1');
+
+    let canvas = document.getElementById('canvas');
+    const ctx = canvas.getContext('2d');
+
+
+    function calculate_colour(x, y, ratio, init) {
+        let imageData = ctx.getImageData(x * size, y * size, 1, 1).data;
+        let r = imageData[0];
+        let g = imageData[1];
+        let b = imageData[2];
+        return `rgba(${init * (1 - ratio) + ratio * r}, ${init * (1 - ratio) + ratio * g}, ${init * (1 - ratio) + ratio * b}, ${255})`;
+    }
+
+
+    reset_h1.style.setProperty('--reset-start', calculate_colour(0.2, 0.2, 0.8, 255));
+    reset_h1.style.setProperty('--reset-end', calculate_colour(0.8, 0.8, 0.8, 255));
+    /*
+    main_h1.style.setProperty('--main-start', calculate_colour(0.2, 0.2, 0.8, 255));
+    main_h1.style.setProperty('--main-end', calculate_colour(0.8, 0.8, 0.8, 255));
+    expression_h1.style.setProperty('--expressions-start', calculate_colour(0.8, 0.2, 0.8, 255));
+    expression_h1.style.setProperty('--expressions-end', calculate_colour(0.2, 0.8, 0.8, 255));
+    */
+
+    let body = document.querySelector('body');
+    body.style.setProperty('--bg-top-left', calculate_colour(0.625, 0.1, 0.4, 0));
+    body.style.setProperty('--bg-top-right', calculate_colour(0.75, 0.4, 0.4, 0));
+    body.style.setProperty('--bg-bottom-left', calculate_colour(0.25, 0.3, 0.4, 0));
+    body.style.setProperty('--bg-bottom-right', calculate_colour(0.45, 0.7, 0.4, 0));
+
+    let buffer_wheel = document.getElementsByClassName('circles')[0];
+    buffer_wheel.style.setProperty('--load-1', calculate_colour(0.75, 0.5, 0.5, 255));
+    buffer_wheel.style.setProperty('--load-2', calculate_colour(0.25, 0.75, 0.5, 255));
+    buffer_wheel.style.setProperty('--load-3', calculate_colour(0.05, 0.05, 0.5, 255));
+
+    for (let i = 0; i < document.getElementsByClassName('slider').length; i++) {
+        let colour_1 = calculate_colour(random(i / 3.2 + 5), random(i * 2), 1, 255);
+        let colour_2 = calculate_colour(random(23.3 * i / 3.2 + 5), random(i * 4), 1, 255);
+        document.getElementsByClassName('slider-value')[i].style.setProperty('--background-colour-1', colour_1);
+        document.getElementsByClassName('slider-value')[i].style.setProperty('--background-colour-2', colour_2);
+        document.getElementById(`r${i + 1}`).style.setProperty('--r-colour', colour_1);
+        document.getElementById(`l${i + 1}`).style.setProperty('--background-colour-1', colour_2);
+        document.getElementById(`l${i + 1}`).style.setProperty('--background-colour-2', colour_2);
+    }
+
+    body.style.setProperty('--reset-shade', calculate_colour(random(53.4), random(187.7), 1, 0));
+}
+worker.onmessage = worker_onmessage;
+
+
+function loopIndex(i) {
+    const slider = document.getElementById(`r${i}`);
+
+    const interval = loops.get(i);
+
+    if (interval) {
+        clearInterval(interval);
+        loops.delete(i);
+        reset_label(i);
+        document.getElementById(`l${i}`).childNodes[0].textContent = "▶";//■
+    } else {
+        
+        
+        const max = slider.max;
+        const min = slider.min;
+        const range = max - min;
+        const step = slider.step;
+        const interval = setInterval(() => {
+            if (slider.value < parseFloat(max)) {
+                slider.value = parseFloat(slider.value) + Math.round((range/50)/step)*step;
+            } else {
+                slider.value = min;
+            }
+            update_canvas(i, false);
+        }, 100);
+        let buffer_style = document.getElementsByClassName('circles')[0].style;
+        buffer_style.animation = 'fading-in 0.5s 1';
+        buffer_style.display = "block";
+        document.getElementById(`l${i}`).childNodes[0].textContent = "■";//▶
+        loops.set(i, interval);
+    }
+}
+
+
+
+
+    </script>
+  </head>
+  <body onload="update_canvas()">
+    
+    <div class="canvas_container">
+      <canvas id="canvas" width="400" height="400"></canvas>
+    </div>
+    
+    <div class="controller_menu">
+      
+      <header class="expressions_header">
+        <div class="circles" title="Loading...">
+          <div id="circle_1" class="circle"></div>
+          <div id="circle_2" class="circle"></div>
+          <div id="circle_3" class="circle"></div>
+          <div id="circle_4" class="circle"></div>
+          <div id="circle_5" class="circle"></div>
+          <div id="circle_6" class="circle"></div>
+          <div id="tooltip_box"></div>
+        </div>
+      </header>
+      
+      <div id="expressions_list">
+      </div>
+      <div class="expressions_footer">
+        <button class="reset_button" onclick="reset_sliders()"><h1 id="reset_h1">Reset Sliders</h1></button>
+      </div>
+
+    </div>
+
+  </body>
+</html> 
