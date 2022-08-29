@@ -110,7 +110,6 @@ body {
     margin: auto;
     display: block;
     height: 53vw;
-    image-rendering: pixelated;
 }
 
 .controller_menu {
@@ -222,10 +221,18 @@ body {
     color: rgba(0, 0, 0, 0);
 
     text-align: center;
-    font-size: 22px;
     
-    font-family: "Tahoma", monospace;
-    font-weight: 600;
+
+    font: 1.4em "Trebuchet MS";
+    /* bold */
+    font-weight: 900;
+
+    font-style: italic;
+    letter-spacing:1px;
+    
+    /*
+    font-family: "Tahoma", monospace !important;
+    */
 
     margin: 0;
 }
@@ -427,6 +434,8 @@ var worker = new Worker(window.URL.createObjectURL(blob));;
 var number_of_workers = 0;
 const loops = new Map();
 
+let loaded = false;
+
 //initialize input sliders
 input_data = [
     /*
@@ -457,18 +466,21 @@ function reset_label(index) {
 
 
 function onload() {
-    var div = document.getElementById('expressions_list');
-    for (let i = 0; i < input_data.length; i++) {
-        div.innerHTML = div.innerHTML + `
-        <span class="magic-slider">
-        <input type="range" min="${input_data[i][2]}" max="${input_data[i][3]}" value="${input_data[i][1]}" step="${input_data[i][4]}" class="slider" id="r${i + 1}" oninput="update_canvas(${i + 1}, false)" onpointerup="reset_label(${i + 1})" onmouseup="reset_label(${i + 1})">
-        <div class="slider-value"><h1 class="slider_text" id="v${i + 1}">${input_data[i][0]}</h1></div>
-        <div class="slider-loop" id="l${i + 1}" onclick="loopIndex(${i + 1})"><h1 class="slider_text" style="font-size: 22px;">▶</h1></div>
-        </span>`;
-    }
-
-
-    update_canvas(0, true);
+    if (loaded == false) {
+        var div = document.getElementById('expressions_list');
+        var div_html = "";
+        for (let i = 0; i < input_data.length; i++) {
+            div_html = div_html + `
+            <span class="magic-slider">
+                <input type="range" min="${input_data[i][2]}" max="${input_data[i][3]}" value="${input_data[i][1]}" step="${input_data[i][4]}" class="slider" id="r${i + 1}" oninput="update_canvas(${i + 1}, false)" onpointerup="reset_label(${i + 1})" onmouseup="reset_label(${i + 1})">
+                <div class="slider-value"><h1 class="slider_text" id="v${i + 1}">${input_data[i][0]}</h1></div>
+                <div class="slider-loop" id="l${i + 1}" onclick="loopIndex(${i + 1})"><h1 class="slider_text" style="font: 1.4em 'Tahoma', monospace !important;">▶</h1></div>
+                </span>`;
+            }
+        }
+        div.innerHTML = div_html;
+        update_canvas(0, true);
+        loaded = true;
 }
 document.addEventListener("DOMContentLoaded", onload);
 
